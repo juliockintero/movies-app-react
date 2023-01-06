@@ -1,31 +1,28 @@
-import React, { useEffect, useState } from 'react'
+//Packages
+import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import './App.css'
-import CardComponent from './components/CardComponent'
+
+//Components
+import FilmSection from './components/FilmSection';
+import Home from './components/Home';
+
 
 
 function App() {
 
-  const [films, setFilms] = useState([])
 
-  const apiKey = 'api_key=dbe3dee6c438945702b17bc1d73cf530'
-  const baseUrl = 'https://api.themoviedb.org/3/'
-  const apiUrl = baseUrl + '/discover/movie?sort_by=popularity.desc&' + apiKey
 
-  useEffect(() => {
-    getData()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
 
-  const getData = async () => {
-    const data = await fetch(apiUrl)
-    const movies = await data.json()
-    setFilms(movies)
-  }
-  console.log(films)
   return (
-    <div className="App bg-gradient-to-r from-slate-800 to-indigo-900">
-      <CardComponent Films={films} />
-    </div>
+    <BrowserRouter>
+      <div className="App bg-gradient-to-r from-slate-800 to-indigo-900 pb-4 h-full">
+        <Routes>
+          <Route exact path='/' element={<Home />}> </Route>
+          <Route path='/movie/:id' element={<FilmSection />}></Route>
+          <Route path='/genres/:id' element={<Home />}></Route>
+        </Routes>
+      </div>
+    </BrowserRouter>
   )
 }
 
