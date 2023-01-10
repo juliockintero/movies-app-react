@@ -7,11 +7,10 @@ import CardComponent from './CardComponent'
 import Navbar from './Navbar'
 import { Button } from '@mui/material'
 
-export const ThemeContext = createContext([]);
+export const ThemeContext = createContext("");
 
 
 const Home = () => {
-
 
     let paramsIds = useParams()
     const [films, setFilms] = useState([])
@@ -27,24 +26,27 @@ const Home = () => {
     if (paramsIds.id === undefined) {
         apiUrl = baseUrl + '/discover/movie?sort_by=popularity.desc&' + apiKey + '&page=' + page
     } else {
-        apiUrl = `${baseUrl}discover/movie?${apiKey}&with_genres=${paramsIds.id}`;
+        apiUrl = `${baseUrl}discover/movie?${apiKey}&with_genres=${paramsIds.id}&page=${page}`;
     }
     // genre.id === undefined ? console.log('Undefined') : apiUrl = `${baseUrl}discover/movie?${apiKey}&with_genres=${genre.id}` setGenres(genre.id)
 
     useEffect(() => {
         getData()
-        //getGenres()
+        getGenres()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [genre, page])
     const increasePag = () => {
         setPage(page + 1)
         getData()
+        window.scrollTo(0, 0)
     }
-    const getGenres = () => setGenre(paramsIds.id)
+    const getGenres = () => setGenre(paramsIds.name)
 
     const decreasePag = () => {
         setPage(page - 1)
         getData()
+        window.scrollTo(0, 0)
+
     }
 
     const getData = async () => {
@@ -55,7 +57,7 @@ const Home = () => {
     console.log(apiUrl)
     return (
         <>
-            <ThemeContext.Provider value={{ genre, setGenre }}>
+            <ThemeContext.Provider value={[films, setFilms]}>
                 <Navbar />
                 <div className='titulo-genero pt-10'>
                     {genre !== [] ? <h2 className='text-4xl font-bold text-white'>{genre}</h2> : <h2 className='text-5xl font-bold'>{apiUrl}</h2>}

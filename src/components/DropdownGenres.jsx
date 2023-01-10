@@ -3,17 +3,21 @@ import React, { useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 //Components
-import { ThemeContext } from './Home'
+
 
 const DropdownGenres = () => {
 
     const [isOpen, setOpen] = useState(false)
-    const { genre, setGenre } = useContext(ThemeContext)
+    const { genre, setGenre } = useState([])
 
     const handleFocus = () => setOpen(!isOpen);
 
 
-    const handleBlur = () => setOpen(false)
+    const handleBlur = () => {
+        setTimeout(() => {
+            setOpen(false)
+        }, 700);
+    }
 
 
     const genres = [
@@ -102,12 +106,12 @@ const DropdownGenres = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
             </button>
 
-            <div id="dropdownDivider" className={`  absolute top-6 z-10 w-56 bg-white rounded  transition duration-300 ease-in-out shadow  ${isOpen ? "opacity-100 " : "opacity-0"}`}>
+            <div id="dropdownDivider" className={`  absolute top-6 z-10 w-56 bg-white rounded  transition duration-300 ease-in-out shadow  ${isOpen ? "visible " : "invisible"}`}>
                 <ul className="grid grid-cols-2 text-sm text-gray-700 dark:text-gray-200">
                     {
                         genres.map(item => (
                             <li key={item.id} >
-                                <Link to={`/genres/${item.id}`} onClick={() => setGenre(item.name)} key={item.id} className="block  rounded py-2 px-4 hover:bg-gradient-to-r from-slate-800 to-indigo-900  hover:text-white">{item.name}</Link>
+                                <Link to={`/genres/${item.name}/${item.id}`} onClick={() => setGenre(item.name)} key={item.id} className="block  rounded py-2 px-4 hover:bg-gradient-to-r from-slate-800 to-indigo-900  hover:text-white">{item.name}</Link>
                             </li>
                         ))
                     }
