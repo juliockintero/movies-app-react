@@ -7,6 +7,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Link } from '@mui/material';
+import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 
 
 const CardComponent = ({ Films }) => {
@@ -27,7 +28,7 @@ const CardComponent = ({ Films }) => {
             {
                 movieList.map(item => (
                     <Link key={item.id} component="button" underline='none' className='group w-full h-full' onClick={() => navigate(`/movie/${item.id}`)}>
-                        <Card sx={{ height: '100%' }} className='relative transition-shadow duration-300 group-hover:shadow-2xl group-hover:shadow-black/50'>
+                        <Card sx={{ height: '100%', bgcolor: '#1e293b' }} className='relative transition-shadow duration-300 group-hover:shadow-2xl group-hover:shadow-black/50'>
                             <div className='overflow-hidden'>
                                 <CardMedia
                                     component="img"
@@ -37,13 +38,17 @@ const CardComponent = ({ Films }) => {
                                     image={baseImgUrl + item.poster_path}
                                 />
                             </div>
-                            <CardContent>
-                                <Typography gutterBottom variant="h6" component="div" className='text-blue-800 '>
+                            <CardContent sx={{ bgcolor: '#1e293b' }}>
+                                <Typography gutterBottom variant="h6" component="div" sx={{ color: '#f1f5f9' }}>
                                     {item.original_title}
                                 </Typography>
-                                <Typography variant="paragraph" color="text.secondary" className='font-bold'>
+                                <Typography variant="paragraph" sx={{ color: '#94a3b8' }} className='font-bold'>
                                     {item.release_date}
                                 </Typography>
+                                <p className='mt-1 flex items-center justify-center gap-1 text-sm font-semibold text-slate-300'>
+                                    <ThumbUpAltIcon sx={{ fontSize: 16, color: '#fbbf24' }} />
+                                    {item.vote_average ? `${Math.round(item.vote_average * 10)}%` : 'NR'}
+                                </p>
                             </CardContent>
                         </Card>
                     </Link>))
