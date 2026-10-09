@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 //Components
 import Navbar from "./Navbar";
 import VoteCircle from "./VoteCircle";
+import CastSection from "./CastSection";
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 
@@ -110,7 +111,7 @@ const FilmSection = () => {
     let params = useParams()
     const apiKey = 'api_key=' + process.env.REACT_APP_TMDB_API_KEY
     const baseUrl = 'https://api.themoviedb.org/3/'
-    const apiUrl = baseUrl + '/movie/' + params.id + '?&' + apiKey
+    const apiUrl = baseUrl + '/movie/' + params.id + '?&' + apiKey + '&append_to_response=credits'
     const cardImage = 'https://image.tmdb.org/t/p/w400'
 
     const [film, setFilm] = useState([])
@@ -148,6 +149,7 @@ const FilmSection = () => {
                 </Card>
                 <FeatureFilm film={film} />
             </div>
+            <CastSection cast={film.credits?.cast} />
             <MediaSection id={params} />
         </>
     )
