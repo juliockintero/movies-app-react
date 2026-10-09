@@ -1,5 +1,5 @@
 //Packages
-import React, { useEffect, useState, useContext, createContext } from 'react'
+import React, { useEffect, useState, createContext } from 'react'
 import { useParams } from 'react-router-dom'
 
 //Compononents
@@ -15,11 +15,9 @@ const Home = () => {
     let paramsIds = useParams()
     const [films, setFilms] = useState([])
     const [page, setPage] = useState(1)
-    const [genre, setGenre] = useState([])
+    const genre = paramsIds.name
 
-    // console.log('genero' + genre.id)
-
-    const apiKey = 'api_key=dbe3dee6c438945702b17bc1d73cf530'
+    const apiKey = 'api_key=' + process.env.REACT_APP_TMDB_API_KEY
     const baseUrl = 'https://api.themoviedb.org/3/'
     let apiUrl
 
@@ -28,39 +26,41 @@ const Home = () => {
     } else {
         apiUrl = `${baseUrl}discover/movie?${apiKey}&with_genres=${paramsIds.id}&page=${page}`;
     }
-    // genre.id === undefined ? console.log('Undefined') : apiUrl = `${baseUrl}discover/movie?${apiKey}&with_genres=${genre.id}` setGenres(genre.id)
 
+    // Al cambiar de género se vuelve a la primera página
     useEffect(() => {
+        setPage(1)
+    }, [paramsIds.id])
+
+    // Se recarga cada vez que cambia la URL (género o página)
+    useEffect(() => {
+        let ignore = false
+        const getData = async () => {
+            const data = await fetch(apiUrl)
+            const movies = await data.json()
+            // Descarta respuestas de una petición anterior que llegue tarde
+            if (!ignore) setFilms(movies)
+        }
         getData()
-        getGenres()
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [genre, page])
+        return () => { ignore = true }
+    }, [apiUrl])
+
     const increasePag = () => {
         setPage(page + 1)
-        getData()
         window.scrollTo(0, 0)
     }
-    const getGenres = () => setGenre(paramsIds.name)
 
     const decreasePag = () => {
         setPage(page - 1)
-        getData()
         window.scrollTo(0, 0)
-
     }
 
-    const getData = async () => {
-        const data = await fetch(apiUrl)
-        const movies = await data.json()
-        setFilms(movies)
-    }
-    console.log(apiUrl)
     return (
         <>
             <ThemeContext.Provider value={[films, setFilms]}>
                 <Navbar />
                 <div className='titulo-genero pt-10'>
-                    {genre !== [] ? <h2 className='text-4xl font-bold text-white'>{genre}</h2> : <h2 className='text-5xl font-bold'>{apiUrl}</h2>}
+                    {genre && <h2 className='text-4xl font-bold text-white'>{genre}</h2>}
                 </div>
                 <CardComponent Films={films} />
                 <Button variant="contained" sx={{ mx: 2 }} disabled={page === 1 ? true : false} onClick={decreasePag}>Prev</Button>

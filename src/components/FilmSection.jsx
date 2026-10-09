@@ -71,7 +71,7 @@ const MediaSection = ({ id }) => {
     const baseVideo = 'https://www.youtube-nocookie.com/embed/'
 
     const getMedia = async () => {
-        const data = await fetch('https://api.themoviedb.org/3/movie/' + id.id + '/videos?api_key=dbe3dee6c438945702b17bc1d73cf530')
+        const data = await fetch('https://api.themoviedb.org/3/movie/' + id.id + '/videos?api_key=' + process.env.REACT_APP_TMDB_API_KEY)
         const media = await data.json()
         setVideos(media.results)
         setLoading(false)
@@ -113,7 +113,7 @@ const MediaSection = ({ id }) => {
 
 const FilmSection = () => {
     let params = useParams()
-    const apiKey = 'api_key=dbe3dee6c438945702b17bc1d73cf530'
+    const apiKey = 'api_key=' + process.env.REACT_APP_TMDB_API_KEY
     const baseUrl = 'https://api.themoviedb.org/3/'
     const apiUrl = baseUrl + '/movie/' + params.id + '?&' + apiKey
     const cardImage = 'https://image.tmdb.org/t/p/w400'

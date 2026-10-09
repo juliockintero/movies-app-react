@@ -1,5 +1,5 @@
 //Packages
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 //Components
@@ -8,15 +8,12 @@ import { Link } from 'react-router-dom'
 const DropdownGenres = () => {
 
     const [isOpen, setOpen] = useState(false)
-    const { genre, setGenre } = useState([])
 
-    const handleFocus = () => setOpen(!isOpen);
+    const handleToggle = () => setOpen(!isOpen);
 
-
-    const handleBlur = () => {
-        setTimeout(() => {
-            setOpen(false)
-        }, 700);
+    // Cierra solo si el foco sale del dropdown (no al pasar del botón a un género)
+    const handleBlur = (e) => {
+        if (!e.currentTarget.contains(e.relatedTarget)) setOpen(false)
     }
 
 
@@ -100,18 +97,18 @@ const DropdownGenres = () => {
     ]
 
     return (
-        <div className='relative'>
-            <button id="dropdownDividerButton" onFocus={handleFocus} onBlur={handleBlur} className="flex items-center" type="button">Genres
-                <svg className="ml-2 w-4 h-4" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <div className='relative' onBlur={handleBlur}>
+            <button id="dropdownDividerButton" onClick={handleToggle} aria-expanded={isOpen} className={`flex items-center transition-colors hover:text-amber-400 ${isOpen ? "text-amber-400" : "text-slate-200"}`} type="button">Genres
+                <svg className={`ml-2 w-4 h-4 transition-transform ${isOpen ? "rotate-180" : ""}`} aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
             </button>
 
-            <div id="dropdownDivider" className={`  absolute top-6 z-10 w-56 bg-white rounded  transition duration-300 ease-in-out shadow  ${isOpen ? "visible " : "invisible"}`}>
-                <ul className="grid grid-cols-2 text-sm text-gray-700 dark:text-gray-200">
+            <div id="dropdownDivider" className={`absolute top-8 z-30 w-64 p-2 bg-slate-900 border border-white/10 rounded-lg shadow-xl shadow-black/40 transition duration-200 ease-out ${isOpen ? "visible opacity-100 translate-y-0" : "invisible opacity-0 -translate-y-1"}`}>
+                <ul className="grid grid-cols-2 gap-1 text-sm text-slate-300 text-left">
                     {
                         genres.map(item => (
                             <li key={item.id} >
-                                <Link to={`/genres/${item.name}/${item.id}`} onClick={() => setGenre(item.name)} key={item.id} className="block  rounded py-2 px-4 hover:bg-gradient-to-r from-slate-800 to-indigo-900  hover:text-white">{item.name}</Link>
+                                <Link to={`/genres/${item.name}/${item.id}`} onClick={() => setOpen(false)} className="block rounded-md py-2 px-3 transition-colors hover:bg-white/10 hover:text-amber-400 focus:bg-white/10 focus:text-amber-400 focus:outline-none">{item.name}</Link>
                             </li>
                         ))
                     }

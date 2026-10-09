@@ -22,23 +22,26 @@ const CardComponent = ({ Films }) => {
     }
     return (
 
-        <div className='container flex flex-wrap justify-between px-10 py-10'>
+        <div className='grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-6 max-w-7xl mx-auto px-10 py-10'>
 
             {
                 movieList.map(item => (
-                    <Link key={item.id} component="button" underline='none' onClick={() => navigate(`/movie/${item.id}`)}>
-                        <Card sx={{ maxWidth: 345, minHeight: 700 }} className='my-2 relative'>
-                            <CardMedia
-                                component="img"
-                                alt="movie-img"
-                                height="150"
-                                image={baseImgUrl + item.poster_path}
-                            />
-                            <CardContent className=''>
-                                <Typography gutterBottom variant="h5" component="div" className='text-blue-800 '>
+                    <Link key={item.id} component="button" underline='none' className='group w-full h-full' onClick={() => navigate(`/movie/${item.id}`)}>
+                        <Card sx={{ height: '100%' }} className='relative transition-shadow duration-300 group-hover:shadow-2xl group-hover:shadow-black/50'>
+                            <div className='overflow-hidden'>
+                                <CardMedia
+                                    component="img"
+                                    alt="movie-img"
+                                    sx={{ aspectRatio: '2 / 3' }}
+                                    className='transition-transform duration-300 ease-out group-hover:scale-110'
+                                    image={baseImgUrl + item.poster_path}
+                                />
+                            </div>
+                            <CardContent>
+                                <Typography gutterBottom variant="h6" component="div" className='text-blue-800 '>
                                     {item.original_title}
                                 </Typography>
-                                <Typography variant="paragraph" color="text.secondary" className='h-24 overflow-y-hidden font-bold	'>
+                                <Typography variant="paragraph" color="text.secondary" className='font-bold'>
                                     {item.release_date}
                                 </Typography>
                             </CardContent>
