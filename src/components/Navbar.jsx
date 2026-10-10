@@ -33,9 +33,6 @@ const Navbar = () => {
                             <li>
                                 <Search />
                             </li>
-                            <li>
-                                <Link href="#" className="block py-2 pl-3 pr-4 rounded md:p-0 text-slate-200 hover:text-amber-400 transition-colors">Pricing</Link>
-                            </li>
                         </ul>
                     </div>
                 </div>
