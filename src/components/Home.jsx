@@ -62,13 +62,13 @@ const Home = () => {
     return (
         <>
             <Navbar />
-            <div className='titulo-genero pt-10'>
+            <div className='titulo-genero pt-8 sm:pt-10 px-4'>
                 {query ?
-                    <h2 className='text-4xl font-bold text-white'>Results for "{query}"</h2>
-                    : genre && <h2 className='text-4xl font-bold text-white'>{genre}</h2>}
+                    <h2 className='text-2xl sm:text-4xl font-bold text-white break-words'>Results for "{query}"</h2>
+                    : genre && <h2 className='text-3xl sm:text-4xl font-bold text-white'>{genre}</h2>}
             </div>
             {noResults ?
-                <p className='py-16 text-lg text-slate-300'>No movies found for "{query}".</p>
+                <p className='py-16 px-4 text-lg text-slate-300'>No movies found for "{query}".</p>
                 : <CardComponent Films={films} />}
             <Button variant="contained" sx={{ mx: 2 }} disabled={page === 1} onClick={decreasePag}>Prev</Button>
             <Button variant="contained" sx={{ mx: 2 }} disabled={!films.total_pages || page >= films.total_pages} onClick={increasePag}>Next</Button>

@@ -22,11 +22,11 @@ const FeatureFilm = ({ film }) => {
     const year = date.getFullYear()
 
     return (
-        <div className="p-5 ml-4 text-white	text-left">
+        <div className="pt-6 md:p-5 md:ml-4 text-white text-left">
 
-            <div className="headerFilm flex py-2">
-                <h1 className=" text-5xl font-bold w-fit ">{film.original_title} </h1>
-                <span className="text-3xl pt-3 px-3">({year})</span>
+            <div className="headerFilm flex flex-wrap items-baseline gap-x-3 py-2">
+                <h1 className="text-3xl md:text-5xl font-bold">{film.original_title}</h1>
+                <span className="text-xl md:text-3xl">({year})</span>
 
             </div>
             <div className="contentFilm">
@@ -43,11 +43,9 @@ const FeatureFilm = ({ film }) => {
                     <VoteCircle vote={film.vote_average} />
                     <p className="text-lg font-bold leading-tight">User<br />Score</p>
                 </div>
-                <div className=" money flex w-fit  py-2">
-                    <p className="text-xl font-bold ">Budget</p>
-                    <span className="text-xl text-emerald-500 px-4">${budget}</span>
-                    <p className="text-xl font-bold ">Reveneu</p>
-                    <span className="text-xl text-emerald-500 px-4">${revenue}</span>
+                <div className="money flex flex-wrap gap-x-8 gap-y-1 py-2 text-lg md:text-xl">
+                    <p><span className="font-bold">Budget</span><span className="text-emerald-500 pl-4">${budget}</span></p>
+                    <p><span className="font-bold">Reveneu</span><span className="text-emerald-500 pl-4">${revenue}</span></p>
                 </div>
                 <h2 className="text-xl font-bold py-2">Overview</h2>
                 <p>
@@ -81,8 +79,8 @@ const MediaSection = ({ id }) => {
 
 
     return (
-        <div className="video pt-10">
-            <h2 className="text-3xl font-bold text-white pb-10">Media section</h2>
+        <div className="video pt-8 md:pt-10 px-4 md:px-10">
+            <h2 className="text-2xl md:text-3xl font-bold text-white pb-6 md:pb-10">Media section</h2>
 
             {
                 loading ?
@@ -97,7 +95,7 @@ const MediaSection = ({ id }) => {
                     <div className="flex flex-wrap justify-center">
                         {
                             videos.map(video =>
-                                <div key={video.key} className="w-96 h-64 m-2 p-2"><iframe className="w-full h-full" src={baseVideo + video.key} title={video.name} key={video.key}></iframe></div>
+                                <div key={video.key} className="w-full sm:w-96 aspect-video my-2 sm:m-2 sm:p-2"><iframe className="w-full h-full" src={baseVideo + video.key} title={video.name} key={video.key}></iframe></div>
                             )
                         }
                     </div>
@@ -134,12 +132,12 @@ const FilmSection = () => {
     return (
         <>
             <Navbar />
-            <div className="film-section flex p-10" style={{
+            <div className="film-section flex flex-col md:flex-row items-center md:items-start p-4 md:p-10" style={{
                 backgroundImage: `linear-gradient(rgba(0, 0, 50, 0.6), rgba(0, 0, 0, 0.5)), url(${backgroundImage})`,
                 backgroundSize: "cover",
                 backgroundPosition: "center"
             }}>
-                <Card sx={{ minWidth: 345, maxHeight: 660 }} className='my-2 relative'>
+                <Card sx={{ width: { xs: 220, md: 'auto' }, minWidth: { md: 345 }, maxHeight: 660, flexShrink: 0 }} className='my-2 relative'>
                     <CardMedia
                         component="img"
                         alt="movie-img"

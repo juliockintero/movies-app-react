@@ -23,7 +23,7 @@ const CardComponent = ({ Films }) => {
     }
     return (
 
-        <div className='grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-6 max-w-7xl mx-auto px-10 py-10'>
+        <div className='grid grid-cols-2 sm:grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-4 sm:gap-6 max-w-7xl mx-auto px-4 sm:px-10 py-6 sm:py-10'>
 
             {
                 movieList.map(item => (
@@ -38,8 +38,8 @@ const CardComponent = ({ Films }) => {
                                     image={baseImgUrl + item.poster_path}
                                 />
                             </div>
-                            <CardContent sx={{ bgcolor: '#1e293b' }}>
-                                <Typography gutterBottom variant="h6" component="div" sx={{ color: '#f1f5f9' }}>
+                            <CardContent sx={{ bgcolor: '#1e293b', p: { xs: 1.5, sm: 2 } }}>
+                                <Typography gutterBottom variant="h6" component="div" sx={{ color: '#f1f5f9', fontSize: { xs: '0.95rem', sm: '1.25rem' }, lineHeight: 1.3 }}>
                                     {item.original_title}
                                 </Typography>
                                 <Typography variant="paragraph" sx={{ color: '#94a3b8' }} className='font-bold'>

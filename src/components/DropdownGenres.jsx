@@ -103,7 +103,7 @@ const DropdownGenres = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
             </button>
 
-            <div id="dropdownDivider" className={`absolute top-8 z-30 w-64 p-2 bg-slate-900 border border-white/10 rounded-lg shadow-xl shadow-black/40 transition duration-200 ease-out ${isOpen ? "visible opacity-100 translate-y-0" : "invisible opacity-0 -translate-y-1"}`}>
+            <div id="dropdownDivider" className={`absolute top-8 left-1/2 -translate-x-1/2 md:left-0 md:translate-x-0 z-30 w-64 p-2 bg-slate-900 border border-white/10 rounded-lg shadow-xl shadow-black/40 transition duration-200 ease-out ${isOpen ? "visible opacity-100 translate-y-0" : "invisible opacity-0 -translate-y-1"}`}>
                 <ul className="grid grid-cols-2 gap-1 text-sm text-slate-300 text-left">
                     {
                         genres.map(item => (

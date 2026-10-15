@@ -11,13 +11,13 @@ const CastSection = ({ cast }) => {
     }
 
     return (
-        <div className="cast pt-10 px-10 text-left">
-            <h2 className="text-3xl font-bold text-white pb-6">Cast</h2>
+        <div className="cast pt-8 md:pt-10 px-4 md:px-10 text-left">
+            <h2 className="text-2xl md:text-3xl font-bold text-white pb-4 md:pb-6">Cast</h2>
 
             <ul className="flex gap-4 overflow-x-auto pb-4 [scrollbar-width:thin] [scrollbar-color:#475569_transparent]">
                 {
                     cast.slice(0, 15).map(actor => (
-                        <li key={actor.credit_id} className="flex-none w-36 rounded-lg overflow-hidden bg-slate-800">
+                        <li key={actor.credit_id} className="flex-none w-28 md:w-36 rounded-lg overflow-hidden bg-slate-800">
                             {
                                 actor.profile_path ?
                                     <img src={profileUrl + actor.profile_path} alt={actor.name} loading="lazy" className="w-full aspect-[2/3] object-cover" />
