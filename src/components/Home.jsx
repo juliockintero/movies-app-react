@@ -19,14 +19,15 @@ const Home = () => {
 
     const apiKey = 'api_key=' + process.env.REACT_APP_TMDB_API_KEY
     const baseUrl = 'https://api.themoviedb.org/3/'
+    const language = 'language=es-MX'
     let apiUrl
 
     if (query) {
-        apiUrl = `${baseUrl}search/movie?${apiKey}&query=${encodeURIComponent(query)}&include_adult=false&page=${page}`
+        apiUrl = `${baseUrl}search/movie?${apiKey}&query=${encodeURIComponent(query)}&include_adult=false&${language}&page=${page}`
     } else if (paramsIds.id === undefined) {
-        apiUrl = baseUrl + '/discover/movie?sort_by=popularity.desc&' + apiKey + '&page=' + page
+        apiUrl = baseUrl + '/discover/movie?sort_by=popularity.desc&' + apiKey + '&' + language + '&page=' + page
     } else {
-        apiUrl = `${baseUrl}discover/movie?${apiKey}&with_genres=${paramsIds.id}&page=${page}`;
+        apiUrl = `${baseUrl}discover/movie?${apiKey}&with_genres=${paramsIds.id}&${language}&page=${page}`;
     }
 
     // Al cambiar de género o de búsqueda se vuelve a la primera página
@@ -64,14 +65,14 @@ const Home = () => {
             <Navbar />
             <div className='titulo-genero pt-8 sm:pt-10 px-4'>
                 {query ?
-                    <h2 className='text-2xl sm:text-4xl font-bold text-white break-words'>Results for "{query}"</h2>
+                    <h2 className='text-2xl sm:text-4xl font-bold text-white break-words'>Resultados para "{query}"</h2>
                     : genre && <h2 className='text-3xl sm:text-4xl font-bold text-white'>{genre}</h2>}
             </div>
             {noResults ?
-                <p className='py-16 px-4 text-lg text-slate-300'>No movies found for "{query}".</p>
+                <p className='py-16 px-4 text-lg text-slate-300'>No se encontraron películas para "{query}".</p>
                 : <CardComponent Films={films} />}
-            <Button variant="contained" sx={{ mx: 2 }} disabled={page === 1} onClick={decreasePag}>Prev</Button>
-            <Button variant="contained" sx={{ mx: 2 }} disabled={!films.total_pages || page >= films.total_pages} onClick={increasePag}>Next</Button>
+            <Button variant="contained" sx={{ mx: 2 }} disabled={page === 1} onClick={decreasePag}>Anterior</Button>
+            <Button variant="contained" sx={{ mx: 2 }} disabled={!films.total_pages || page >= films.total_pages} onClick={increasePag}>Siguiente</Button>
         </>
     )
 }

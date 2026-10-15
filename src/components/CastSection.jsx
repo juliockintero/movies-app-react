@@ -12,7 +12,7 @@ const CastSection = ({ cast }) => {
 
     return (
         <div className="cast pt-8 md:pt-10 px-4 md:px-10 text-left">
-            <h2 className="text-2xl md:text-3xl font-bold text-white pb-4 md:pb-6">Cast</h2>
+            <h2 className="text-2xl md:text-3xl font-bold text-white pb-4 md:pb-6">Reparto</h2>
 
             <ul className="flex gap-4 overflow-x-auto pb-4 [scrollbar-width:thin] [scrollbar-color:#475569_transparent]">
                 {

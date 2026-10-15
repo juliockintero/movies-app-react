@@ -20,27 +20,27 @@ const DropdownGenres = () => {
     const genres = [
         {
             "id": 28,
-            "name": "Action"
+            "name": "Acción"
         },
         {
             "id": 12,
-            "name": "Adventure"
+            "name": "Aventura"
         },
         {
             "id": 16,
-            "name": "Animation"
+            "name": "Animación"
         },
         {
             "id": 35,
-            "name": "Comedy"
+            "name": "Comedia"
         },
         {
             "id": 80,
-            "name": "Crime"
+            "name": "Crimen"
         },
         {
             "id": 99,
-            "name": "Documentary"
+            "name": "Documental"
         },
         {
             "id": 18,
@@ -48,27 +48,27 @@ const DropdownGenres = () => {
         },
         {
             "id": 10751,
-            "name": "Family"
+            "name": "Familia"
         },
         {
             "id": 14,
-            "name": "Fantasy"
+            "name": "Fantasía"
         },
         {
             "id": 36,
-            "name": "History"
+            "name": "Historia"
         },
         {
             "id": 27,
-            "name": "Horror"
+            "name": "Terror"
         },
         {
             "id": 10402,
-            "name": "Music"
+            "name": "Música"
         },
         {
             "id": 9648,
-            "name": "Mystery"
+            "name": "Misterio"
         },
         {
             "id": 10749,
@@ -76,19 +76,19 @@ const DropdownGenres = () => {
         },
         {
             "id": 878,
-            "name": "Science Fiction"
+            "name": "Ciencia ficción"
         },
         {
             "id": 10770,
-            "name": "TV Movie"
+            "name": "Película de TV"
         },
         {
             "id": 53,
-            "name": "Thriller"
+            "name": "Suspenso"
         },
         {
             "id": 10752,
-            "name": "War"
+            "name": "Bélica"
         },
         {
             "id": 37,
@@ -98,7 +98,7 @@ const DropdownGenres = () => {
 
     return (
         <div className='relative' onBlur={handleBlur}>
-            <button id="dropdownDividerButton" onClick={handleToggle} aria-expanded={isOpen} className={`flex items-center transition-colors hover:text-amber-400 ${isOpen ? "text-amber-400" : "text-slate-200"}`} type="button">Genres
+            <button id="dropdownDividerButton" onClick={handleToggle} aria-expanded={isOpen} className={`flex items-center transition-colors hover:text-amber-400 ${isOpen ? "text-amber-400" : "text-slate-200"}`} type="button">Géneros
                 <svg className={`ml-2 w-4 h-4 transition-transform ${isOpen ? "rotate-180" : ""}`} aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
             </button>

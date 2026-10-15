@@ -47,14 +47,14 @@ const Search = () => {
         <div>
 
             <form onSubmit={handleSubmit}>
-                <label htmlFor="default-search" className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+                <label htmlFor="default-search" className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Buscar</label>
                 <div className="relative w-full md:w-64">
                     <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                         <svg aria-hidden="true" className="w-3 h-3 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                     </div>
-                    <input type="search" id="default-search" ref={inputRef} value={query} onChange={(e) => setQuery(e.target.value)} className="block w-full py-2.5 pl-10 pr-9 text-sm text-slate-100 placeholder-slate-400 border border-slate-700 rounded-lg bg-slate-800 focus:outline-none focus:ring-1 focus:ring-amber-400 focus:border-amber-400 [&::-webkit-search-cancel-button]:appearance-none" placeholder="Search Movies..." autoComplete="off" />
+                    <input type="search" id="default-search" ref={inputRef} value={query} onChange={(e) => setQuery(e.target.value)} className="block w-full py-2.5 pl-10 pr-9 text-sm text-slate-100 placeholder-slate-400 border border-slate-700 rounded-lg bg-slate-800 focus:outline-none focus:ring-1 focus:ring-amber-400 focus:border-amber-400 [&::-webkit-search-cancel-button]:appearance-none" placeholder="Buscar películas..." autoComplete="off" />
                     {query &&
-                        <button type="button" onClick={handleClear} aria-label="Clear search" className="absolute inset-y-0 right-0 flex items-center pr-3 text-slate-400 hover:text-slate-200 transition-colors">
+                        <button type="button" onClick={handleClear} aria-label="Borrar búsqueda" className="absolute inset-y-0 right-0 flex items-center pr-3 text-slate-400 hover:text-slate-200 transition-colors">
                             <CloseIcon sx={{ fontSize: 16 }} />
                         </button>
                     }

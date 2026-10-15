@@ -32,7 +32,7 @@ const CardComponent = ({ Films }) => {
                             <div className='overflow-hidden'>
                                 <CardMedia
                                     component="img"
-                                    alt="movie-img"
+                                    alt={item.title}
                                     sx={{ aspectRatio: '2 / 3' }}
                                     className='transition-transform duration-300 ease-out group-hover:scale-110'
                                     image={baseImgUrl + item.poster_path}
@@ -40,14 +40,14 @@ const CardComponent = ({ Films }) => {
                             </div>
                             <CardContent sx={{ bgcolor: '#1e293b', p: { xs: 1.5, sm: 2 } }}>
                                 <Typography gutterBottom variant="h6" component="div" sx={{ color: '#f1f5f9', fontSize: { xs: '0.95rem', sm: '1.25rem' }, lineHeight: 1.3 }}>
-                                    {item.original_title}
+                                    {item.title}
                                 </Typography>
                                 <Typography variant="paragraph" sx={{ color: '#94a3b8' }} className='font-bold'>
-                                    {item.release_date}
+                                    {item.release_date ? new Date(item.release_date).toLocaleDateString('es', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' }) : 'Sin fecha'}
                                 </Typography>
                                 <p className='mt-1 flex items-center justify-center gap-1 text-sm font-semibold text-slate-300'>
                                     <ThumbUpAltIcon sx={{ fontSize: 16, color: '#fbbf24' }} />
-                                    {item.vote_average ? `${Math.round(item.vote_average * 10)}%` : 'NR'}
+                                    {item.vote_average ? `${Math.round(item.vote_average * 10)}%` : 'N/D'}
                                 </p>
                             </CardContent>
                         </Card>

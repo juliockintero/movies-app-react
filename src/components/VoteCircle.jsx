@@ -21,7 +21,7 @@ const VoteCircle = ({ vote, size = 72 }) => {
                     className='transition-[stroke-dashoffset] duration-700 ease-out' />
             </svg>
             <span className='absolute font-bold text-white' style={{ fontSize: size * 0.26 }}>
-                {rated ? <>{percent}<sup style={{ fontSize: size * 0.13 }}>%</sup></> : 'NR'}
+                {rated ? <>{percent}<sup style={{ fontSize: size * 0.13 }}>%</sup></> : 'N/D'}
             </span>
         </div>
     )

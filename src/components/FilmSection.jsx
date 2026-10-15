@@ -14,9 +14,9 @@ const FeatureFilm = ({ film }) => {
 
     const generos = film.genres
     let budgedNum = parseFloat(film.budget)
-    const budget = budgedNum.toLocaleString()
+    const budget = budgedNum.toLocaleString('es')
     let revenueNum = parseFloat(film.revenue)
-    const revenue = revenueNum.toLocaleString()
+    const revenue = revenueNum.toLocaleString('es')
     let dateString = film.release_date
     let date = new Date(Date.parse(dateString))
     const year = date.getFullYear()
@@ -25,7 +25,7 @@ const FeatureFilm = ({ film }) => {
         <div className="pt-6 md:p-5 md:ml-4 text-white text-left">
 
             <div className="headerFilm flex flex-wrap items-baseline gap-x-3 py-2">
-                <h1 className="text-3xl md:text-5xl font-bold">{film.original_title}</h1>
+                <h1 className="text-3xl md:text-5xl font-bold">{film.title}</h1>
                 <span className="text-xl md:text-3xl">({year})</span>
 
             </div>
@@ -35,21 +35,21 @@ const FeatureFilm = ({ film }) => {
                         Array.isArray(generos) ?
                             generos.map(item => (<span className="my-2 mx-1" key={item.id}>{item.name + ","}</span>)) : null
                     }
-                    <span className="pl-3 before:content-['\2022']">{film.runtime}m</span>
+                    <span className="pl-3 before:content-['\2022']">{film.runtime} min</span>
 
 
                 </div>
                 <div className="flex items-center gap-3 py-2">
                     <VoteCircle vote={film.vote_average} />
-                    <p className="text-lg font-bold leading-tight">User<br />Score</p>
+                    <p className="text-lg font-bold leading-tight">Puntuación<br />de usuarios</p>
                 </div>
                 <div className="money flex flex-wrap gap-x-8 gap-y-1 py-2 text-lg md:text-xl">
-                    <p><span className="font-bold">Budget</span><span className="text-emerald-500 pl-4">${budget}</span></p>
-                    <p><span className="font-bold">Reveneu</span><span className="text-emerald-500 pl-4">${revenue}</span></p>
+                    <p><span className="font-bold">Presupuesto</span><span className="text-emerald-500 pl-4">${budget}</span></p>
+                    <p><span className="font-bold">Recaudación</span><span className="text-emerald-500 pl-4">${revenue}</span></p>
                 </div>
-                <h2 className="text-xl font-bold py-2">Overview</h2>
+                <h2 className="text-xl font-bold py-2">Sinopsis</h2>
                 <p>
-                    {film.overview}
+                    {film.overview || 'No hay sinopsis disponible en español.'}
                 </p>
             </div>
         </div>
@@ -65,7 +65,7 @@ const MediaSection = ({ id }) => {
     const baseVideo = 'https://www.youtube-nocookie.com/embed/'
 
     const getMedia = async () => {
-        const data = await fetch('https://api.themoviedb.org/3/movie/' + id.id + '/videos?api_key=' + process.env.REACT_APP_TMDB_API_KEY)
+        const data = await fetch('https://api.themoviedb.org/3/movie/' + id.id + '/videos?api_key=' + process.env.REACT_APP_TMDB_API_KEY + '&language=es-MX&include_video_language=es,en')
         const media = await data.json()
         setVideos(media.results)
         setLoading(false)
@@ -80,7 +80,7 @@ const MediaSection = ({ id }) => {
 
     return (
         <div className="video pt-8 md:pt-10 px-4 md:px-10">
-            <h2 className="text-2xl md:text-3xl font-bold text-white pb-6 md:pb-10">Media section</h2>
+            <h2 className="text-2xl md:text-3xl font-bold text-white pb-6 md:pb-10">Videos</h2>
 
             {
                 loading ?
@@ -89,7 +89,7 @@ const MediaSection = ({ id }) => {
                             <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor" />
                             <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="#1C64F2" />
                         </svg>
-                        Loading...
+                        Cargando...
                     </div>
                     :
                     <div className="flex flex-wrap justify-center">
@@ -109,7 +109,7 @@ const FilmSection = () => {
     let params = useParams()
     const apiKey = 'api_key=' + process.env.REACT_APP_TMDB_API_KEY
     const baseUrl = 'https://api.themoviedb.org/3/'
-    const apiUrl = baseUrl + '/movie/' + params.id + '?&' + apiKey + '&append_to_response=credits'
+    const apiUrl = baseUrl + 'movie/' + params.id + '?' + apiKey + '&append_to_response=credits&language=es-MX'
     const cardImage = 'https://image.tmdb.org/t/p/w400'
 
     const [film, setFilm] = useState([])
@@ -140,7 +140,7 @@ const FilmSection = () => {
                 <Card sx={{ width: { xs: 220, md: 'auto' }, minWidth: { md: 345 }, maxHeight: 660, flexShrink: 0 }} className='my-2 relative'>
                     <CardMedia
                         component="img"
-                        alt="movie-img"
+                        alt={film.title}
                         height="150"
                         image={cardImage + film.poster_path}
                     />
